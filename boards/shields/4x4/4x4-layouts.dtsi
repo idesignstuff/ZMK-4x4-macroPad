@@ -1,7 +1,7 @@
 #include <physical_layouts.dtsi>
 
 / {
-    4x4_layout: 4x4_layout {
+    4x4-layout: 4x4-layout {
         compatible = "zmk,physical-layout";
         display-name = "Default";
 
