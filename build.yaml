@@ -4,8 +4,8 @@
 # pass flags to the build command, `snippet` to add a Zephyr snippet, and
 # `artifact-name` to assign a name to distinguish build outputs from each other:
 #
-# board: [ "nice_nano_v2" ]
-# shield: [ "corne_left", "corne_right" ]
+ board: [ "seeduino_xiao_ble" ]
+ shield: [ "4x4" ]
 # include:
 #   - board: bdn9_rev2
 #   - board: nice_nano_v2
@@ -17,25 +17,3 @@
 #     artifact-name: corne_left_with_studio
 #
 ---
-manifest:
-  remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    - name: petejoganson
-      url-base: https://github.com/petejohanson
-    - name: grassfedreeve
-      url-base: https://github.com/grassfedreeve
-  projects:
-    - name: zmk
-      remote: zmkfirmware
-      revision: main
-      import: app/west.yml
-    - name: ec-support-zmk-module
-      remote: petejohanson
-      revision: main
-    - name: zmk-keyboards-katori
-      remote: grassfedreeve
-      revision: main
-  self:
-    path: config# This file generates the GitHub Actions matrix.
-
