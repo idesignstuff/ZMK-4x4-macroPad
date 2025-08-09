@@ -1,0 +1,4 @@
+config SHIELD_4X4
+    def_bool $(shields_list_contains,4x4)
+    select ADC
+    select GPIO
