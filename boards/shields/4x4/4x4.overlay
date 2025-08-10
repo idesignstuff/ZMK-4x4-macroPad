@@ -1,8 +1,8 @@
-
 /*
  * Copyright (c) 2025 idesignstuff
  * SPDX-License-Identifier: MIT
  */
+
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
 
