@@ -11,6 +11,7 @@
 	chosen {
 		zmk,kscan = &matrix;
 	};
+};
 
 / {
     kscan0: kscan0 {
