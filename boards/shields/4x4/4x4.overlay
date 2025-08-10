@@ -12,6 +12,27 @@
 		zmk,kscan = &matrix;
 	};
 
+/ {
+    kscan0: kscan0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+        wakeup-source;
+
+        col-gpios
+            = <&gpio1  4 GPIO_ACTIVE_HIGH>  // column 0
+            , <&gpio1  6 GPIO_ACTIVE_HIGH>  // column 1
+            , <&gpio0 31 GPIO_ACTIVE_HIGH>  // column 2
+            , <&gpio0 29 GPIO_ACTIVE_HIGH>  // column 3
+            ;            
+
+        row-gpios
+            = <&gpio1  1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 0
+            , <&gpio1 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 1
+            , <&gpio1  2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 2
+            , <&gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 3
+            ;
+    };
+};
 	4x4-layout,: 4x4-layout {
 		compatible = "zmk,physical-layout";
 		display-name = "Default";
@@ -37,78 +58,12 @@
             ;
 	};
 	
-	left_mux: left_mux {
-		compatible = "zmk,gpio-mux";
-		select-gpios
-			= <&xiao_d 1 GPIO_ACTIVE_HIGH>
-		        , <&xiao_d 2 GPIO_ACTIVE_HIGH>
-		        , <&xiao_d 3 GPIO_ACTIVE_HIGH>
-			;
 
-		en-gpios = <&xiao_d 6 GPIO_ACTIVE_LOW>;
-
-		gpio-controller;
-		ngpios = <8>;
-		#gpio-cells = <2>;
-	};
-
-	right_mux: right_mux {
-		compatible = "zmk,gpio-mux";
-		select-gpios
-			= <&xiao_d 1 GPIO_ACTIVE_HIGH>
-		        , <&xiao_d 2 GPIO_ACTIVE_HIGH>
-		        , <&xiao_d 3 GPIO_ACTIVE_HIGH>
-			;
-
-		en-gpios = <&xiao_d 5 GPIO_ACTIVE_LOW>;
-
-		gpio-controller;
-		ngpios = <8>;
-		#gpio-cells = <2>;
-	};
-
-	matrix: matrix {
-		compatible = "zmk,kscan-ec-matrix";
-
-		matrix-relax-us = <1000>;
-		adc-read-settle-us = <1>;
-
-		strobe-gpios
-			= <&xiao_d 10 GPIO_ACTIVE_HIGH>
-		        , <&xiao_d 9 GPIO_ACTIVE_HIGH>
-		        , <&xiao_d 8 GPIO_ACTIVE_HIGH>
-		        , <&xiao_d 7 GPIO_ACTIVE_HIGH>
-			;
-
-		input-gpios
-			= <&left_mux 2 0>
-			, <&left_mux 1 0>
-			, <&left_mux 0 0>
-			, <&left_mux 3 0>
-			, <&left_mux 5 0>
-			, <&left_mux 7 0>
-			, <&right_mux 4 0>
-			, <&right_mux 6 0>
-			, <&right_mux 2 0>
-			, <&right_mux 1 0>
-			, <&right_mux 0 0>
-			, <&right_mux 3 0>
-			;
-
-		drain-gpios = <&xiao_d 4 GPIO_ACTIVE_HIGH>;
-		// io-channels = <&xiao_adc 0>;
-		strobe-input-masks = <
-			0
-			0
-			0
-			(BIT(0) + BIT(1) + BIT(2) + BIT(9) + BIT(10) + BIT(11))
-			>;
-	};
 
 	matrix_transform: matrix_transform {
 		compatible = "zmk,matrix-transform";
 
-		columns = <10>;
+		columns = <4>;
 		rows = <4>;
 	
 		map = <
